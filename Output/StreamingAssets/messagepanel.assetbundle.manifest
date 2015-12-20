@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3797902428
+CRC: 2508640617
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -40,4 +40,4 @@ ClassTypes:
 Assets:
 - Assets/Examples/Builds/Message/MessagePanel.prefab
 Dependencies:
-- E:/UnityWorks/WorkHere/uLua/Output/StreamingAssets/shared_asset.assetbundle
+- E:/UnityWorks/WorkHere/UClient/Output/StreamingAssets/shared_asset.assetbundle

@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3019994316
+CRC: 2587934196
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -36,4 +36,4 @@ ClassTypes:
 Assets:
 - Assets/Examples/Builds/Prompt/PromptItem.prefab
 Dependencies:
-- E:/UnityWorks/WorkHere/uLua/Output/StreamingAssets/prompt_asset.assetbundle
+- E:/UnityWorks/WorkHere/UClient/Output/StreamingAssets/prompt_asset.assetbundle

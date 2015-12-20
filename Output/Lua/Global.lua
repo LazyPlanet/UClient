@@ -1,6 +1,8 @@
 PanelManager = LuaGame.PanelManager
 ResourceManager = LuaGame.ResourceManager
 
+NetManager = LuaGame.NetworkManager.Instance
+
 function OnReceiveMessage(id,buffer)
 	warn("OnReceiveMessage----------------",id,buffer)
 

@@ -4,28 +4,6 @@ print("UnityEngine",UnityEngine)
 
 local GameObject = UnityEngine.GameObject
 
-local obj = GameObject.New("Hello")
-
-warn("obj",obj,obj.name)
-
-UnityEngine.Object.Destroy(obj)
-
-warn("obj2",obj,obj.isNil)
-
-warn(LuaGame.ByteBuffer)
-
-local buff = LuaGame.ByteBuffer.New()
-warn("buff",buff)
-
---luanet.free_object(buff)
-
-warn(buff)
-buff:unbind()
-warn(buff,buff.isNil)
-warn("LuaGame.ByteBuffer",LuaGame.ByteBuffer)
-
-warn("LuaUtil",LuaUtil.GetType("Button"),LuaUtil.GetType("UI.Button"))
-
 
 --[[local resMgr = GameObject.Find("ResourceManager"):GetComponent("ResourceManager")
 
@@ -38,7 +16,6 @@ end)]]
 	warn("load finished",go)
 	UnityEngine.Object.Instantiate(go)
 end)]]
-local NetManager = LuaGame.NetworkManager.Instance
 
 --NetManager:SendConnect("127.0.0.1",2012)
 --warn("Connect...")
@@ -75,9 +52,41 @@ local function test_login_conn()
 	buffer:WriteByte(0);
 	buffer:WriteString("ffff我的ffffQ靈uuu");
 	buffer:WriteInt(200);
-	NetManager:ConnectToServer("127.0.0.1",2012,buffer)
-	--NetManager:SendConnect("127.0.0.1",2012)
+	--NetManager:ConnectToServer("127.0.0.1",2012,buffer)
+	NetManager:SendConnect("127.0.0.1",2012)
 	warn("Connect Login...")
+end
+
+local function onCreate(panel)
+	local grid = panel.transform:FindChild("ScrollView/Grid")
+	GameUtil.LoadAsset("PromptItem","PromptItem",function(g)
+		warn("load finished",g)
+		
+		local count = 100; 
+		for i = 1, count do
+			local go = UnityEngine.Object.Instantiate(g)
+			go.name = 'Item'..tostring(i);
+			go.transform:SetParent(grid.transform);
+			go.transform.localScale = Vector3.one;
+			go.transform.localPosition = Vector3.zero;
+	        --prompt:AddClick(go, this.OnItemClick);
+
+		    local label = go.transform:FindChild('Text');
+		    label:GetComponent('Text').text = tostring(i);
+		end
+		local rtTrans = grid:GetComponent("RectTransform");
+		local rowNum = count / 4;
+		if count % 4 > 0 then
+			rowNum = toInt(rowNum + 1);
+		end
+		local size = rtTrans.sizeDelta;
+		size.y = rowNum * 100 + (rowNum - 1) * 50;
+		rtTrans.sizeDelta = size;
+
+		local position = rtTrans.localPosition;
+		position.y = -(size.y / 2);
+		rtTrans.localPosition = position;
+	end)
 end
 
 GameUtil.CreatePanel("PromptPanel",function(panel)
@@ -95,9 +104,10 @@ GameUtil.CreatePanel("PromptPanel",function(panel)
 				test_login_binary()
 			end
 		end,
-
 	}
 	lb:TouchGUIMsg(mst);
+
+	onCreate(panel)
 end)
 
 

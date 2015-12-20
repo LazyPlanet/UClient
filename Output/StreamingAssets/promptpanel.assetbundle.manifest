@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1430787792
+CRC: 2636081054
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f5b5a5d9d2a11f94ebc6aedef3e86489
+    Hash: 9a40d928a636a751ed37497643cd7357
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4084d01ed01b7aca1d79665b6161ebd3
+    Hash: ab3a2535ecd93304a5af50e952450c3e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,8 +20,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 - Class: 114
-  Script: {fileID: -2095666955, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-- Class: 114
   Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 - Class: 114
   Script: {fileID: -1200242548, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -29,6 +27,8 @@ ClassTypes:
   Script: {fileID: 1367256648, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 - Class: 114
   Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+- Class: 114
+  Script: {fileID: -2095666955, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -42,4 +42,4 @@ ClassTypes:
 Assets:
 - Assets/Examples/Builds/Prompt/PromptPanel.prefab
 Dependencies:
-- E:/UnityWorks/WorkHere/uLua/Output/StreamingAssets/shared_asset.assetbundle
+- E:/UnityWorks/WorkHere/UClient/Output/StreamingAssets/shared_asset.assetbundle
