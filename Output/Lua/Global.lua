@@ -3,6 +3,9 @@ ResourceManager = LuaGame.ResourceManager
 
 NetManager = LuaGame.NetworkManager.Instance
 
+GameObject = UnityEngine.GameObject
+LuaBehaviour = LuaGame.LuaBehaviour
+
 function OnReceiveMessage(id,buffer)
 	warn("OnReceiveMessage----------------",id,buffer)
 

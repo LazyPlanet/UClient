@@ -2,9 +2,6 @@ print("Start...")
 
 print("UnityEngine",UnityEngine)
 
-local GameObject = UnityEngine.GameObject
-
-
 --[[local resMgr = GameObject.Find("ResourceManager"):GetComponent("ResourceManager")
 
 resMgr:LoadAsset("prompt","PromptPanel",function(go)
@@ -57,11 +54,38 @@ local function test_login_conn()
 	warn("Connect Login...")
 end
 
+local function show_msgbox(text)
+	GameUtil.CreatePanel("MessagePanel",function(panel)
+		local lb = panel:AddComponent(LuaBehaviour.GetClassType());
+		local mst = {
+			onAwake = function(go) warn("awake",go) end,
+			--onStart = function() warn("Start panel") end,
+			--onDestroy = function() warn("onDestroy") end,
+			onClick = function(go)
+				if go.name == "Button" then
+					UnityEngine.Object.Destroy(panel)
+				end
+			end,
+		}
+		lb:TouchGUIMsg(mst);
+
+		local lb_obj = panel.transform:FindChild("Label")
+		lb_obj:GetComponent("Text").text = text
+
+		lb_obj:unbind()
+	end)
+end
+
+local function onItemClick(go)
+	warn("onItemClick",go)
+
+	show_msgbox(go.name)
+end
+
 local function onCreate(panel)
 	local grid = panel.transform:FindChild("ScrollView/Grid")
+	local msgHandle = panel:GetComponent("LuaBehaviour")
 	GameUtil.LoadAsset("PromptItem","PromptItem",function(g)
-		warn("load finished",g)
-		
 		local count = 100; 
 		for i = 1, count do
 			local go = UnityEngine.Object.Instantiate(g)
@@ -69,8 +93,8 @@ local function onCreate(panel)
 			go.transform:SetParent(grid.transform);
 			go.transform.localScale = Vector3.one;
 			go.transform.localPosition = Vector3.zero;
-	        --prompt:AddClick(go, this.OnItemClick);
-
+	        msgHandle:AddClick(go, onItemClick);
+	        --msgHandle:AttachEventHandle()
 		    local label = go.transform:FindChild('Text');
 		    label:GetComponent('Text').text = tostring(i);
 		end
@@ -78,6 +102,7 @@ local function onCreate(panel)
 		local rowNum = count / 4;
 		if count % 4 > 0 then
 			rowNum = toInt(rowNum + 1);
+			warn("111111111111")
 		end
 		local size = rtTrans.sizeDelta;
 		size.y = rowNum * 100 + (rowNum - 1) * 50;
@@ -90,18 +115,19 @@ local function onCreate(panel)
 end
 
 GameUtil.CreatePanel("PromptPanel",function(panel)
-	local LuaBehaviour = LuaGame.LuaBehaviour
 	local lb = panel:AddComponent(LuaBehaviour.GetClassType());
 	local mst = {
 		onAwake = function(go) warn("awake",go) end,
 		--onStart = function() warn("Start panel") end,
 		--onDestroy = function() warn("onDestroy") end,
 		onClick = function(go)
-			if not NetManager.IsConnected then
-				test_login_conn()
-			else
-				test_login_pb()
-				test_login_binary()
+			if go.name == "Open" then
+				if not NetManager.IsConnected then
+					test_login_conn()
+				else
+					test_login_pb()
+					test_login_binary()
+				end
 			end
 		end,
 	}
