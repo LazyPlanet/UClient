@@ -1,0 +1,8 @@
+﻿2015-12-20 13:21:09,246 [13644] ERROR DefaultBootstrap - The process crashed for an unhandled exception!
+System.Net.HttpListenerException (0x80004005): 由于线程退出或应用程序请求，已中止 I/O 操作。
+   在 System.Net.HttpListener.GetContext()
+   在 SimpleFramework.Service.HttpService.Listen() 位置 e:\workspace\SimpleFramework_UGUI\Server\Server\Service\HttpService.cs:行号 34
+   在 System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   在 System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   在 System.Threading.ThreadHelper.ThreadStart()
