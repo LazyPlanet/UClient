@@ -317,18 +317,19 @@ namespace LuaGame
         private Dictionary<string, AssetBundle> bundles;
         public string AssetPath = string.Empty;
 
-        static ResourceManager ResMgr = null;
+        private static ResourceManager _instance = null;
+        public static ResourceManager TouchInstance(ref GameObject go)
+        {
+            _instance = go.GetComponent<ResourceManager>();
+            if (null == _instance)
+            {
+                _instance = go.AddComponent<ResourceManager>();
+            }
+            return _instance;
+        }
         public static ResourceManager Instance
         {
-            get
-            {
-                if (null == ResMgr)
-                {
-                    GameObject obj = new GameObject("ResourceManager");
-                    ResMgr = obj.AddComponent<ResourceManager>();
-                }
-                return ResMgr;
-            }
+            get { return _instance; }
         }
 
         /// <summary>

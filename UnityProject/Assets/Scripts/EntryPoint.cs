@@ -30,11 +30,12 @@ public class EntryPoint : MonoBehaviour {
 #if ASYNC_MODE
         ResourceManager.BaseDownloadingURL = Util.GetRelativePath() + AppConst.AssetDirname + "/";
 #endif
-
         Debug.Log("AssetsPath:" + AssetsPath);
         Debug.Log("LuaBasePath:" + LuaScriptMgr.LuaBasePath);
         Debug.Log("LuaConfigPath:" + LuaScriptMgr.LuaConfigPath);
+#if ASYNC_MODE
         Debug.Log("StreamingAssets:" + ResourceManager.BaseDownloadingURL);
+#endif
         //Debug.Log("streamingAssetsPath:" + Application.streamingAssetsPath);
         yield return null;
     }
@@ -51,10 +52,14 @@ public class EntryPoint : MonoBehaviour {
         evt.AddComponent<UnityEngine.EventSystems.EventSystem>();
         evt.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
         evt.AddComponent<UnityEngine.EventSystems.TouchInputModule>();
-        
+#if ASYNC_MODE 
         var request = ResourceManager.Initialize(AppConst.AssetDirname);
         if (request != null)
             yield return StartCoroutine(request);
+#else
+        ResourceManager.Initialize(Util.DataPath + AppConst.AssetDirname + "/");
+        yield return null;
+#endif
     }
 
     IEnumerator SetupLua()
